@@ -72,7 +72,6 @@
 
         </ul>
 
-<!--        displays user's profile photo-->
         <img
                 class="rounded-circle me-3"
                 height="50px"
@@ -80,6 +79,7 @@
                 th:if="${user.photosImagePath!=null}"
                 th:src="@{${user?.photosImagePath}}"
         />
+
         <label th:if="${user.firstName != null && user.lastName != null}"
                th:text="${user.firstName+' '+user.lastName}"
                class="nav-item nav-link px-2 me-3">

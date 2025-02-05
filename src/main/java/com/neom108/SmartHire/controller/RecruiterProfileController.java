@@ -29,12 +29,12 @@ import java.util.Optional;
 @RequestMapping("/recruiter-profile")
 public class RecruiterProfileController {
 
-    private final UsersRepository usersRepository;
     private final RecruiterProfileService recruiterProfileService;
+    private final UsersService usersService;
 
-    public RecruiterProfileController(UsersRepository usersRepository, RecruiterProfileService recruiterProfileService) {
-        this.usersRepository = usersRepository;
+    public RecruiterProfileController(RecruiterProfileService recruiterProfileService, UsersService usersService) {
         this.recruiterProfileService = recruiterProfileService;
+        this.usersService = usersService;
     }
 
     @GetMapping("/")
@@ -45,7 +45,7 @@ public class RecruiterProfileController {
         if(!(authentication instanceof AnonymousAuthenticationToken)){
             String currentUserName = authentication.getName();
 
-            Users users = usersRepository.findByEmail(currentUserName).orElseThrow(()-> new UsernameNotFoundException("Unable to find user"));
+            Users users = usersService.getUserByEmail(currentUserName).orElseThrow(()-> new UsernameNotFoundException("Unable to find user"));
 
             Optional<RecruiterProfile> recruiterProfile = recruiterProfileService.getOne(users.getUserId());
 
@@ -64,7 +64,7 @@ public class RecruiterProfileController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if(!(authentication instanceof AnonymousAuthenticationToken)) {
             String currentUsername = authentication.getName();
-            Users users = usersRepository.findByEmail(currentUsername).orElseThrow(() -> new UsernameNotFoundException("Unable to find user"));
+            Users users = usersService.getUserByEmail(currentUsername).orElseThrow(()-> new UsernameNotFoundException("Unable to find user"));
 
             recruiterProfile.setUserId(users);
             recruiterProfile.setUserAccountId(users.getUserId());
@@ -86,7 +86,7 @@ public class RecruiterProfileController {
         RecruiterProfile savedUser = recruiterProfileService.addNew(recruiterProfile);
 
         //setting upload directory to save the profile image
-        String uploadDir = "photos/recruiter/" + savedUser.getUserAccountId();
+        String uploadDir = "photos/recruiter/" + savedUser.getUserAccountId()+"/";
 
         try{
             //save the image on server in the directory photos/recruiter
