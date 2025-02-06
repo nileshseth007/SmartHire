@@ -55,7 +55,7 @@ public class UsersController {
             return "register";
         }
         usersService.addNew(users);
-        return "redirect:/dashboard";
+        return "redirect:/dashboard/";
     }
 
     @GetMapping("/login")

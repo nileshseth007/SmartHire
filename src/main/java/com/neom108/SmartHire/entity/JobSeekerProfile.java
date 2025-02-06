@@ -155,7 +155,7 @@ public class JobSeekerProfile {
             return null;
         }
 
-        return "photos/candidate/"+userAccountId+"/"+profilePhoto;
+        return "/photos/candidate/"+userAccountId+"/"+profilePhoto;
     }
 
     @Override
