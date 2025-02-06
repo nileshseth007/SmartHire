@@ -91,19 +91,19 @@ public class JobPostActivity {
         this.jobCompanyId = jobCompanyId;
     }
 
-    public boolean isActive() {
+    public boolean getIsActive() {
         return isActive;
     }
 
-    public void setActive(boolean active) {
+    public void setIsActive(boolean active) {
         isActive = active;
     }
 
-    public boolean isSaved() {
+    public boolean getIsSaved() {
         return isSaved;
     }
 
-    public void setSaved(boolean saved) {
+    public void setIsSaved(boolean saved) {
         isSaved = saved;
     }
 
@@ -159,9 +159,9 @@ public class JobPostActivity {
     public String toString() {
         return "JobPostActivity{" +
                 "jobPostId=" + jobPostId +
-                ", postedById=" + postedById +
-                ", jobLocationId=" + jobLocationId +
-                ", jobCompanyId=" + jobCompanyId +
+                ", postedById=" + postedById.toString() +
+                ", jobLocationId=" + jobLocationId.toString() +
+                ", jobCompanyId=" + jobCompanyId.toString() +
                 ", isActive=" + isActive +
                 ", isSaved=" + isSaved +
                 ", descriptionOfJob='" + descriptionOfJob + '\'' +

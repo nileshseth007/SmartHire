@@ -99,7 +99,7 @@ public class Users {
                 ", password='" + password + '\'' +
                 ", isActive=" + isActive +
                 ", registrationDate=" + registrationDate +
-                ", userType=" + userTypeId +
+                ", userType=" + userTypeId.toString() +
                 '}';
     }
 }
